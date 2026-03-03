@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lavender Surprise</title>
+
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#E6E6FA,#D8BFD8);
+    overflow:hidden;
+}
+
+.section{
+    height:100vh;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    position:absolute;
+    transition:1s;
+    background:linear-gradient(135deg,#E6E6FA,#FFFFFF);
+}
+
+.hidden{
+    opacity:0;
+    pointer-events:none;
+}
+
+h1,h2,p{
+    color:#6A0DAD;
+    text-shadow:0 0 15px rgba(186,85,211,0.8);
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:20px;
+    background:#D8BFD8;
+    color:#6A0DAD;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 0 15px #BA55D3;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(3,120px);
+    gap:10px;
+}
+
+.gallery img{
+    width:120px;
+    height:120px;
+    border-radius:15px;
+    object-fit:cover;
+    box-shadow:0 0 15px #BA55D3;
+}
+
+.typing{
+    width:70%;
+    font-size:20px;
+    text-align:center;
+    min-height:120px;
+}
+
+video{
+    width:320px;
+    border-radius:20px;
+    box-shadow:0 0 20px #BA55D3;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Sheet 1 -->
+<div class="section" id="s1">
+    <h1>Happy Birthday 💜</h1>
+    <button onclick="next(1)">Open Surprise</button>
+</div>
+
+<!-- Sheet 2 -->
+<div class="section hidden" id="s2">
+    <h2>Beautiful Memories ✨</h2>
+    <div class="gallery">
+        <img src="1.jpeg">
+        <img src="2.jpeg">
+        <img src="3.jpeg">
+        <img src="4.jpeg">
+        <img src="5.jpeg">
+    </div>
+    <p>Every moment with you is magical 💫</p>
+    <button onclick="next(2)">Next</button>
+</div>
+
+<!-- Sheet 3 -->
+<div class="section hidden" id="s3">
+    <h2>A Letter For You 💌</h2>
+    <div class="typing" id="letter"></div>
+    <button onclick="next(3)">Next</button>
+</div>
+
+<!-- Sheet 4 -->
+<div class="section hidden" id="s4">
+    <h2>Our Special Video 🎥</h2>
+    
+    <video id="bdayVideo" controls>
+        <source src="birthday.mp4" type="video/mp4">
+    </video>
+
+    <p id="finalMessage" 
+       style="font-size:22px; font-weight:bold; margin-top:20px; display:none;">
+        Thank you for being in my life 💜✨
+    </p>
+</div>
+
+<script>
+
+/* Page switching */
+function next(current){
+    document.getElementById("s"+current).classList.add("hidden");
+    document.getElementById("s"+(current+1)).classList.remove("hidden");
+}
+
+/* Auto typing effect */
+const text = `You are my happiness.
+You are my strength.
+You make my world brighter.
+Every day with you is special.
+I’m grateful for you always. 💜`;
+
+let i = 0;
+
+function type(){
+    if(i < text.length){
+        document.getElementById("letter").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type,50);
+    }
+}
+
+type();
+
+/* Wait until page fully loads */
+window.onload = function(){
+    const video = document.getElementById("bdayVideo");
+    const finalMessage = document.getElementById("finalMessage");
+
+    video.onended = function(){
+        finalMessage.style.display = "block";
+
+        // Optional auto exit after 5 seconds
+        setTimeout(function(){
+            alert("The End 💜");
+        },5000);
+    };
+};
+
+</script>
+
+</body>
+</html>

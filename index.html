@@ -165,7 +165,7 @@ video {
 <!-- Sheet 1 -->
 <div class="section" id="s1">
     <h1>Happy Birthday 💜</h1>
-    <button onclick="next(1)">Open Surprise</button>
+    <button onclick="startExperience()">Open Surprise</button>
 </div>
 
 <!-- Sheet 2 -->
@@ -176,7 +176,7 @@ video {
         <img src="2.jpeg">
         <img src="3.jpeg">
         <img src="4.jpeg">
-        
+        <img src="5.jpeg">
     </div>
     <p>Every moment with you is magical 💫</p>
     <button onclick="next(2)">Next</button>
@@ -193,7 +193,7 @@ video {
 <div class="section hidden" id="s4">
     <h2>Our Special Video 🎥</h2>
     
-<video id="bdayVideo" controls playsinline>
+    <video id="bdayVideo" controls>
         <source src="birthday.mp4" type="video/mp4">
     </video>
 
@@ -201,16 +201,36 @@ video {
        style="font-size:22px; font-weight:bold; margin-top:20px; display:none;">
         Thank you for being in my life 💜✨
     </p>
+    <button onclick="exitPage()">Exit</button>
 </div>
-
+<audio id="bgMusic" loop>
+  <source src="./music.mp3" type="audio/mp3">
+</audio>
 <script>
-
-/* Page switching */
-function next(current){
+    function next(current){
     document.getElementById("s"+current).classList.add("hidden");
     document.getElementById("s"+(current+1)).classList.remove("hidden");
 }
+function exitPage(){
+    window.location.href = "about:blank";
+}
 
+/* Page switching */
+function startExperience(){
+    const music = document.getElementById("bgMusic");
+
+    music.volume = 0.4;
+
+    const playPromise = music.play();
+
+    if (playPromise !== undefined) {
+        playPromise.catch(error => {
+            console.log("Autoplay blocked:", error);
+        });
+    }
+  type(); 
+    next(1);
+}
 /* Auto typing effect */
 const text = `You are my happiness.
 You are my strength.
@@ -232,16 +252,25 @@ type();
 
 /* Wait until page fully loads */
 window.onload = function(){
+
     const video = document.getElementById("bdayVideo");
     const finalMessage = document.getElementById("finalMessage");
+    const music = document.getElementById("bgMusic");
 
+    // Pause music when video starts
+    video.onplay = function(){
+        music.pause();
+    };
+
+    // Show thank you after video ends
     video.onended = function(){
         finalMessage.style.display = "block";
 
-        // Optional auto exit after 5 seconds
         setTimeout(function(){
-            alert("The End 💜");
-        },5000);
+            if(confirm("The End 💜\n\nClick OK to Exit")){
+                window.location.href = "about:blank";
+            }
+        },3000);
     };
 };
 
@@ -249,5 +278,3 @@ window.onload = function(){
 
 </body>
 </html>
-
-

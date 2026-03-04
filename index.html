@@ -2,13 +2,14 @@
 <html>
 <head>
 <title>Lavender Surprise</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
     margin:0;
     font-family:'Segoe UI',sans-serif;
     background:linear-gradient(135deg,#E6E6FA,#D8BFD8);
-    overflow:hidden;
+    overflow-x:hidden;
 }
 
 .section{
@@ -70,7 +71,80 @@ video{
     border-radius:20px;
     box-shadow:0 0 20px #BA55D3;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #f3e8ff, #ffffff);
+  overflow-x: hidden;
+  text-align: center;
+}
+
+.section{
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    position:absolute;
+    transition:1s;
+    background:linear-gradient(135deg,#E6E6FA,#FFFFFF);
+    padding:20px;
+}
+h1 {
+  font-size: 2rem;
+  color: #7e22ce;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 30px;
+  background: #c084fc;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #a855f7;
+  transform: scale(1.05);
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 5px 
+  15px rgba(126, 34, 206, 0.3);
+}
+video {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+#letter {
+  font-size: 1.1rem;
+  max-width: 600px;
+  color: #6b21a8;
+  line-height: 1.6;
+}
 </style>
+
 </head>
 
 <body>
